@@ -351,19 +351,21 @@ async function updateSkorFromSheets() {
   const semi = await fetchSheetData('Semifinal');
   const final = await fetchSheetData('Final');
 
-  const updateInput = (prefix, data) => {
-    data.forEach((row, i) => {
-      const s1 = row[2], s2 = row[3];
-      const input1 = document.getElementById(`score-${prefix}-${i+1}-1`);
-      const input2 = document.getElementById(`score-${prefix}-${i+1}-2`);
-      if (input1 && input2) {
-        input1.value = s1;
-        input2.value = s2;
-        input1.disabled = true;
-        input2.disabled = true;
-      }
-    });
-  };
+const updateInput = (groupKey, data) => {
+  data.forEach(row => {
+    const matchNo = parseInt(row[0]); // Kolom "No" di sheet
+    const s1 = row[3]; // Skor 1 (kolom ke-4)
+    const s2 = row[4]; // Skor 2 (kolom ke-5)
+    const input1 = document.getElementById(`score-${groupKey}-${matchNo}-1`);
+    const input2 = document.getElementById(`score-${groupKey}-${matchNo}-2`);
+    if (input1 && input2) {
+      input1.value = s1;
+      input2.value = s2;
+      input1.disabled = true;
+      input2.disabled = true;
+    }
+  });
+};
 
   updateInput('A', grupA);
   updateInput('B', grupB);
@@ -467,6 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
 
 
 
