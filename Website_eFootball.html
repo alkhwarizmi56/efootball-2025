@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>eFootball Tournament</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+   background: #f3f4f6 !important;
+    color: #222;
+  }
+
+  nav {
+    display: flex;
+    background: #0d47a1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  nav button {
+    flex: 1;
+    padding: 14px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  nav button:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  nav button.active {
+    background: #1565c0;
+    font-weight: bold;
+  }
+
+  .tab {
+    display: none;
+    padding: 20px;
+  }
+
+  .tab.active {
+    display: block;
+  }
+
+  h2, h3 {
+    margin-top: 30px;
+    color: #0d47a1;
+  }
+
+  .matchday {
+    margin-top: 40px;
+    border-bottom: 2px solid #1565c0;
+    padding-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .match-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    margin: 5px 0;
+    padding: 10px 12px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .match-row span {
+    flex: 1;
+    font-size: 15px;
+  }
+
+  .input-score {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
+  th {
+    background: #0d47a1;
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 8px;
+    border-top: 1px solid #ddd;
+  }
+
+  .highlight {
+    background-color: #d0f0c0;
+    font-weight: bold;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .match-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .match-row span {
+      width: 100%;
+      margin-bottom: 6px;
+    }
+  }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+header {
+  background: linear-gradient(135deg, #1976d2, #7e57c2);
+  color: white;
+  text-align: center;
+  padding: 30px 20px 10px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  width: calc(100% - 40px);
+  margin: 20px auto 30px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+header .sub {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #e3f2fd;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-content {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.logo-kiri {
+  height: 180px;
+  margin: 0 -50px;
+  align-self: center;
+  object-fit: contain;
+  transform: translateY(-10px);
+}
+
+.header-img {
+  height: 180px;
+  margin-left: 20px;
+  margin-right: 10px;
+  object-fit: contain;
+  align-self: flex-end;
+}
+
+.header-content .text.tengah {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transform: translateY(-25px);
+}
+
+header {
+  background: linear-gradient(135deg, #1976d2, #7e57c2);
+  color: white;
+  padding: 30px 20px 10px;
+  margin: 20px auto 30px auto;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: calc(100% - 40px);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+header .sub {
+  margin-top: 8px;
+  font-size: 20px;
+  color: #e3f2fd;
+}
+</style>
+
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <img src="logo_efootball_30th.png" alt="eFootball Logo" class="logo-kiri" />
+    <div class="text tengah">
+      <h1>eFootball Tournament 2025</h1>
+      <p class="sub">12 Tim | 15 – 21 Agustus | Format Grup & Knockout</p>
+    </div>
+    <img src="pngegg.png" alt="Player Image" class="header-img" />
+  </div>
+</header>
+<nav>
+  <button class="tab-btn active" data-tab="jadwal">Jadwal</button>
+  <button class="tab-btn" data-tab="klasemen">Klasemen</button>
+</nav>
+
+<div id="jadwal" class="tab active">
+  <div id="jadwal-content"></div>
+</div>
+
+<div id="klasemen" class="tab">
+  <div id="klasemen-A"></div>
+  <div id="klasemen-B"></div>
+</div>
+
+<script>
+const teams = {
+  A: ['Farhan', 'Mugi', 'Amin', 'Dimas', 'Afif', 'Debi'],
+  B: ['Riski', 'Fauzan', 'Fajri', 'Alwi', 'Hermansyah', 'Noval']
+};
+
+const jadwalTanggal = {
+  '15 Agustus': [['A',0],['B',0],['A',1],['B',1],['A',2],['B',2]],
+  '16 Agustus': [['A',3],['B',3],['A',4],['B',4],['A',5],['B',5]],
+  '17 Agustus': [['A',6],['B',6],['A',7],['B',7],['A',8],['B',8]],
+  '18 Agustus': [['A',9],['B',9],['A',10],['B',10],['A',11],['B',11]],
+  '19 Agustus': [['A',12],['B',12],['A',13],['B',13],['A',14],['B',14]],
+};
+
+const jadwal = {
+  A: [
+    ['Farhan','Debi'], ['Mugi','Afif'], ['Amin','Dimas'],
+    ['Farhan','Afif'], ['Debi','Dimas'], ['Mugi','Amin'],
+    ['Farhan','Dimas'], ['Afif','Amin'], ['Debi','Mugi'],
+    ['Farhan','Amin'], ['Dimas','Mugi'], ['Afif','Debi'],
+    ['Farhan','Mugi'], ['Amin','Debi'], ['Dimas','Afif']
+  ],
+  B: [
+    ['Riski','Noval'], ['Fauzan','Hermansyah'], ['Fajri','Alwi'],
+    ['Riski','Hermansyah'], ['Noval','Alwi'], ['Fauzan','Fajri'],
+    ['Riski','Alwi'], ['Hermansyah','Fajri'], ['Noval','Fauzan'],
+    ['Riski','Fajri'], ['Alwi','Fauzan'], ['Hermansyah','Noval'],
+    ['Riski','Fauzan'], ['Fajri','Noval'], ['Alwi','Hermansyah']
+  ]
+};
+
+let hasil = { A: {}, B: {} };
+teams.A.forEach(t => hasil.A[t] = {main:0, menang:0, seri:0, kalah:0, gm:0, gk:0});
+teams.B.forEach(t => hasil.B[t] = {main:0, menang:0, seri:0, kalah:0, gm:0, gk:0});
+function createMatch(group, idx, team1, team2) {
+  return `
+    <div class="match-row">
+      <span>Grup ${group}</span>
+      <span>${team1} vs ${team2}</span>
+      <span>
+        <input class="input-score" id="score-${group}-${idx+1}-1" type="number" min="0"> -
+        <input class="input-score" id="score-${group}-${idx+1}-2" type="number" min="0">
+      </span>
+    </div>
+  `;
+}
+
+function renderJadwal() {
+  const container = document.getElementById('jadwal-content');
+  container.innerHTML = '';
+
+  for (let tanggal in jadwalTanggal) {
+    container.innerHTML += `<h3 class="matchday">${tanggal}</h3>`;
+    jadwalTanggal[tanggal].forEach(([group, idx]) => {
+      const [t1, t2] = jadwal[group][idx];
+      container.innerHTML += createMatch(group, idx, t1, t2);
+    });
+  }
+
+  container.innerHTML += `
+    <h3 class="matchday">20 Agustus - Semifinal</h3>
+    <div class="match-row hidden" id="sf1-row">
+      <span>Semifinal 1</span>
+      <span id="semi1-team1">-</span> vs <span id="semi1-team2">-</span>
+      <span>
+        <input class="input-score" id="score-semi1-1" type="number"> -
+        <input class="input-score" id="score-semi1-2" type="number">
+      </span>
+    </div>
+    <div class="match-row hidden" id="sf2-row">
+      <span>Semifinal 2</span>
+      <span id="semi2-team1">-</span> vs <span id="semi2-team2">-</span>
+      <span>
+        <input class="input-score" id="score-semi2-1" type="number"> -
+        <input class="input-score" id="score-semi2-2" type="number">
+      </span>
+    </div>
+
+    <h3 class="matchday">21 Agustus - Final</h3>
+    <div class="match-row">
+      <span>Final</span>
+      <span id="final-team1">Pemenang SF1</span> vs <span id="final-team2">Pemenang SF2</span>
+      <span>
+        <input class="input-score" id="score-final-1" type="number"> -
+        <input class="input-score" id="score-final-2" type="number">
+      </span>
+    </div>
+  `;
+}
+function updateKlasemen() {
+  hasil.A = {}; hasil.B = {};
+  teams.A.forEach(t => hasil.A[t] = {main:0, menang:0, seri:0, kalah:0, gm:0, gk:0});
+  teams.B.forEach(t => hasil.B[t] = {main:0, menang:0, seri:0, kalah:0, gm:0, gk:0});
+
+  ['A','B'].forEach(g => {
+    for (let i = 0; i < jadwal[g].length; i++) {
+      const [home, away] = jadwal[g][i];
+      const s1 = parseInt(document.getElementById(`score-${g}-${i+1}-1`)?.value);
+      const s2 = parseInt(document.getElementById(`score-${g}-${i+1}-2`)?.value);
+      if (!isNaN(s1) && !isNaN(s2)) {
+        hasil[g][home].main++; hasil[g][away].main++;
+        hasil[g][home].gm += s1; hasil[g][home].gk += s2;
+        hasil[g][away].gm += s2; hasil[g][away].gk += s1;
+        if (s1 > s2) { hasil[g][home].menang++; hasil[g][away].kalah++; }
+        else if (s1 < s2) { hasil[g][away].menang++; hasil[g][home].kalah++; }
+        else { hasil[g][home].seri++; hasil[g][away].seri++; }
+      }
+    }
+  });
+
+  ['A','B'].forEach(g => {
+    const table = document.getElementById(`klasemen-${g}`);
+    let data = Object.entries(hasil[g]).map(([nama, stat]) => {
+      const poin = stat.menang*3 + stat.seri;
+      const selisih = stat.gm - stat.gk;
+      return {nama, ...stat, poin, selisih};
+    });
+
+    data.sort((a,b) =>
+      b.poin - a.poin || b.selisih - a.selisih || b.gm - a.gm
+    );
+
+    let html = `<h2>Grup ${g}</h2><table><tr><th>#</th><th>Tim</th><th>Main</th><th>Menang</th><th>Seri</th><th>Kalah</th><th>GM</th><th>GK</th><th>Selisih</th><th>Poin</th></tr>`;
+    data.forEach((d,i) => {
+      const highlight = i < 2 ? 'class="highlight"' : '';
+      html += `<tr ${highlight}><td>${i+1}</td><td>${d.nama}</td><td>${d.main}</td><td>${d.menang}</td><td>${d.seri}</td><td>${d.kalah}</td><td>${d.gm}</td><td>${d.gk}</td><td>${d.selisih}</td><td>${d.poin}</td></tr>`;
+    });
+    html += '</table>';
+    table.innerHTML = html;
+
+    // semifinal otomatis
+    if (g === 'A') {
+      document.getElementById('semi1-team1').innerText = data[0]?.nama || '-';
+      document.getElementById('semi2-team2').innerText = data[1]?.nama || '-';
+    } else {
+      document.getElementById('semi2-team1').innerText = data[0]?.nama || '-';
+      document.getElementById('semi1-team2').innerText = data[1]?.nama || '-';
+    }
+
+    // tampilkan semifinal kalau semua pertandingan selesai
+    const semuaMain = data.reduce((sum, d) => sum + d.main, 0);
+    if (semuaMain === 30) {
+      document.getElementById('sf1-row').classList.remove('hidden');
+      document.getElementById('sf2-row').classList.remove('hidden');
+    }
+  });
+
+  // Final otomatis
+  const t1 = document.getElementById('semi1-team1').innerText;
+  const t2 = document.getElementById('semi1-team2').innerText;
+  const t3 = document.getElementById('semi2-team1').innerText;
+  const t4 = document.getElementById('semi2-team2').innerText;
+  const sf1a = parseInt(document.getElementById('score-semi1-1')?.value);
+  const sf1b = parseInt(document.getElementById('score-semi1-2')?.value);
+  const sf2a = parseInt(document.getElementById('score-semi2-1')?.value);
+  const sf2b = parseInt(document.getElementById('score-semi2-2')?.value);
+  if (!isNaN(sf1a) && !isNaN(sf1b)) {
+    document.getElementById('final-team1').innerText = sf1a > sf1b ? t1 : t2;
+  }
+  if (!isNaN(sf2a) && !isNaN(sf2b)) {
+    document.getElementById('final-team2').innerText = sf2a > sf2b ? t3 : t4;
+  }
+}
+
+// Jalankan semuanya
+document.addEventListener('DOMContentLoaded', () => {
+  renderJadwal();
+  updateKlasemen();
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      updateKlasemen();
+    });
+  });
+
+  document.addEventListener('input', updateKlasemen);
+});
+</script>
+</body>
+</html>
