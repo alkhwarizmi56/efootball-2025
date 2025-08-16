@@ -332,7 +332,7 @@ function renderJadwal() {
 // === FETCH DATA DARI GOOGLE SHEETS ===
 async function fetchSheetData(sheetName) {
  const sheetId = '1-gmM8HLrexRcq9UOl1FqJIRSlZLGOD_dtbM9t1-DiQs';
-  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+ const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
 
   try {
     const res = await fetch(url);
@@ -467,5 +467,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
 
 
