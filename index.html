@@ -273,9 +273,6 @@ const jadwal = {
   ]
 };
 
-let hasil = { A: {}, B: {} };
-teams.A.forEach(t => hasil.A[t] = {main:0, menang:0, seri:0, kalah:0, gm:0, gk:0});
-teams.B.forEach(t => hasil.B[t] = {main:0, menang:0, seri:0, kalah:0, gm:0, gk:0});
 function createMatch(group, idx, team1, team2) {
   return `
     <div class="match-row">
@@ -331,6 +328,52 @@ function renderJadwal() {
     </div>
   `;
 }
+
+// === FETCH DATA DARI GOOGLE SHEETS ===
+async function fetchSheetData(sheetName) {
+  const sheetId = '2PACX-1vT1ZjjmhS2Cq7BWOa57JPHHRLdksl_RyU1U-0iZSQKlkhZYoZehFzSXU6cTFO5A8isLY0QgbXrjxXcY';
+  const url = `https://docs.google.com/spreadsheets/d/e/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.substr(47).slice(0, -2));
+    return json.table.rows.map(row => row.c.map(cell => cell?.v || ''));
+  } catch (err) {
+    console.error("Gagal fetch dari sheet", sheetName, err);
+    return [];
+  }
+}
+
+async function updateSkorFromSheets() {
+  const grupA = await fetchSheetData('GrupA');
+  const grupB = await fetchSheetData('GrupB');
+  const semi = await fetchSheetData('Semifinal');
+  const final = await fetchSheetData('Final');
+
+  const updateInput = (prefix, data) => {
+    data.forEach((row, i) => {
+      const s1 = row[2], s2 = row[3];
+      const input1 = document.getElementById(`score-${prefix}-${i+1}-1`);
+      const input2 = document.getElementById(`score-${prefix}-${i+1}-2`);
+      if (input1 && input2) {
+        input1.value = s1;
+        input2.value = s2;
+        input1.disabled = true;
+        input2.disabled = true;
+      }
+    });
+  };
+
+  updateInput('A', grupA);
+  updateInput('B', grupB);
+  updateInput('semi1', semi.length > 0 ? [semi[0]] : []);
+  updateInput('semi2', semi.length > 1 ? [semi[1]] : []);
+  updateInput('final', final.length > 0 ? [final[0]] : []);
+}
+
+let hasil = { A: {}, B: {} };
+
 function updateKlasemen() {
   hasil.A = {}; hasil.B = {};
   teams.A.forEach(t => hasil.A[t] = {main:0, menang:0, seri:0, kalah:0, gm:0, gk:0});
@@ -372,7 +415,6 @@ function updateKlasemen() {
     html += '</table>';
     table.innerHTML = html;
 
-    // semifinal otomatis
     if (g === 'A') {
       document.getElementById('semi1-team1').innerText = data[0]?.nama || '-';
       document.getElementById('semi2-team2').innerText = data[1]?.nama || '-';
@@ -381,7 +423,6 @@ function updateKlasemen() {
       document.getElementById('semi1-team2').innerText = data[1]?.nama || '-';
     }
 
-    // tampilkan semifinal kalau semua pertandingan selesai
     const semuaMain = data.reduce((sum, d) => sum + d.main, 0);
     if (semuaMain === 30) {
       document.getElementById('sf1-row').classList.remove('hidden');
@@ -389,7 +430,6 @@ function updateKlasemen() {
     }
   });
 
-  // Final otomatis
   const t1 = document.getElementById('semi1-team1').innerText;
   const t2 = document.getElementById('semi1-team2').innerText;
   const t3 = document.getElementById('semi2-team1').innerText;
@@ -406,9 +446,9 @@ function updateKlasemen() {
   }
 }
 
-// Jalankan semuanya
 document.addEventListener('DOMContentLoaded', () => {
   renderJadwal();
+  updateSkorFromSheets();
   updateKlasemen();
 
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -427,3 +467,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
