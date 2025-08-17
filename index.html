@@ -2,300 +2,266 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>eFootball Tournament</title>
-    <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-   background: #f3f4f6 !important;
-    color: #222;
-  }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f3f4f6;
+      color: #222;
+      font-size: 16px;
+    }
 
-  nav {
-    display: flex;
-    background: #0d47a1;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  }
+    nav {
+      display: flex;
+      background: #0d47a1;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      flex-wrap: wrap;
+    }
 
-  nav button {
-    flex: 1;
-    padding: 14px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
+    nav button {
+      flex: 1;
+      padding: 14px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
 
-  nav button:hover {
-    background: rgba(255,255,255,0.1);
-  }
+    nav button:hover {
+      background: rgba(255,255,255,0.1);
+    }
 
-  nav button.active {
-    background: #1565c0;
-    font-weight: bold;
-  }
+    nav button.active {
+      background: #1565c0;
+      font-weight: bold;
+    }
 
-  .tab {
-    display: none;
-    padding: 20px;
-  }
+    .tab {
+      display: none;
+      padding: 20px;
+    }
 
-  .tab.active {
-    display: block;
-  }
+    .tab.active {
+      display: block;
+    }
 
-  h2, h3 {
-    margin-top: 30px;
-    color: #0d47a1;
-  }
+    h2, h3 {
+      margin-top: 30px;
+      color: #0d47a1;
+    }
 
-  .matchday {
-    margin-top: 40px;
-    border-bottom: 2px solid #1565c0;
-    padding-bottom: 5px;
-    font-size: 18px;
-    font-weight: bold;
-  }
+    .matchday {
+      margin-top: 40px;
+      border-bottom: 2px solid #1565c0;
+      padding-bottom: 5px;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-  .match-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    margin: 5px 0;
-    padding: 10px 12px;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
+    .match-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      margin: 5px 0;
+      padding: 10px 12px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      flex-wrap: wrap;
+    }
 
-  .match-row span {
-    flex: 1;
-    font-size: 15px;
-  }
+    .match-row span {
+      flex: 1;
+      font-size: 15px;
+    }
 
-  .input-score {
-    width: 40px;
-    text-align: center;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 4px;
-  }
+    .input-score {
+      width: 40px;
+      text-align: center;
+      font-weight: bold;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 4px;
+      font-size: 16px;
+    }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: white;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
 
-  th {
-    background: #0d47a1;
-    color: white;
-    padding: 10px;
-    font-weight: 600;
-  }
+    th, td {
+      padding: 8px;
+      border-top: 1px solid #ddd;
+      font-size: 14px;
+    }
 
-  td {
-    padding: 8px;
-    border-top: 1px solid #ddd;
-  }
+    th {
+      background: #0d47a1;
+      color: white;
+      font-weight: 600;
+    }
 
-  .highlight {
-    background-color: #d0f0c0;
-    font-weight: bold;
-  }
+    .highlight {
+      background-color: #d0f0c0;
+      font-weight: bold;
+    }
 
-  .hidden {
-    display: none;
-  }
+    .hidden {
+      display: none;
+    }
 
-@media (max-width: 600px) {
-  header {
-    padding: 20px 10px;
-  }
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
 
-  .header-content {
-    flex-direction: column;
-    align-items: center;
-  }
+      header h1 {
+        font-size: 26px;
+      }
 
-  .logo-kiri,
-  .header-img {
-    height: 100px;
-    margin: 0 0 10px;
-  }
+      header .sub {
+        font-size: 14px;
+      }
 
-  .header-content .text.tengah {
-    transform: translateY(0);
-  }
+      nav button {
+        font-size: 14px;
+        padding: 10px;
+      }
 
-  header h1 {
-    font-size: 24px;
-    text-align: center;
-  }
+      .match-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-  header .sub {
-    font-size: 14px;
-    text-align: center;
-  }
+      .match-row span {
+        width: 100%;
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
 
-  nav button {
-    font-size: 14px;
-    padding: 10px;
-  }
+      .input-score {
+        width: 50px;
+        font-size: 14px;
+      }
 
-  .match-row {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
+      table {
+        font-size: 12px;
+      }
 
-  .match-row span {
-    width: 100%;
-    margin-bottom: 8px;
-    font-size: 14px;
-  }
+      th, td {
+        padding: 6px;
+      }
 
-  .input-score {
-    width: 36px;
-    padding: 3px;
-    font-size: 14px;
-  }
+      .header-content {
+        flex-direction: column;
+        align-items: center;
+      }
 
-  table {
-    display: block;
-    overflow-x: auto;
-    font-size: 13px;
-  }
+      .logo-kiri,
+      .header-img {
+        height: 100px;
+        margin: 10px 0;
+      }
 
-  th, td {
-    white-space: nowrap;
-    padding: 6px;
-  }
-}
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+      .header-content .text.tengah {
+        transform: translateY(0);
+      }
+    }
 
-header {
-  background: linear-gradient(135deg, #1976d2, #7e57c2);
-  color: white;
-  text-align: center;
-  padding: 30px 20px 10px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-  width: calc(100% - 40px);
-  margin: 20px auto 30px auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
+    header {
+      background: linear-gradient(135deg, #1976d2, #7e57c2);
+      color: white;
+      text-align: center;
+      padding: 30px 20px 10px;
+      margin: 20px auto 30px auto;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      width: calc(100% - 40px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
 
-header h1 {
-  margin: 0;
-  font-size: 30px;
-  font-weight: 600;
-}
+    header h1 {
+      margin: 0;
+      font-size: 50px;
+      font-weight: 700;
+    }
 
-header .sub {
-  margin-top: 8px;
-  font-size: 14px;
-  color: #e3f2fd;
-}
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    header .sub {
+      margin-top: 8px;
+      font-size: 20px;
+      color: #e3f2fd;
+    }
 
-.header-content {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
+    .header-content {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
 
-.logo-kiri {
-  height: 180px;
-  margin: 0 -50px;
-  align-self: center;
-  object-fit: contain;
-  transform: translateY(-10px);
-}
+    .logo-kiri {
+      height: 180px;
+      margin: 0 -50px;
+      object-fit: contain;
+      transform: translateY(-10px);
+    }
 
-.header-img {
-  height: 180px;
-  margin-left: 20px;
-  margin-right: 10px;
-  object-fit: contain;
-  align-self: flex-end;
-}
+    .header-img {
+      height: 180px;
+      margin-left: 20px;
+      margin-right: 10px;
+      object-fit: contain;
+    }
 
-.header-content .text.tengah {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  transform: translateY(-25px);
-}
-
-header {
-  background: linear-gradient(135deg, #1976d2, #7e57c2);
-  color: white;
-  padding: 30px 20px 10px;
-  margin: 20px auto 30px auto;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  width: calc(100% - 40px);
-}
-
-header h1 {
-  margin: 0;
-  font-size: 50px;
-  font-weight: 700;
-}
-
-header .sub {
-  margin-top: 8px;
-  font-size: 20px;
-  color: #e3f2fd;
-}
-</style>
-
+    .header-content .text.tengah {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transform: translateY(-25px);
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div class="header-content">
-    <img src="logo_efootball_30th.png" alt="eFootball Logo" class="logo-kiri" />
-    <div class="text tengah">
-      <h1>eFootball Tournament 2025</h1>
-      <p class="sub">12 Tim | 15 – 21 Agustus | Format Grup & Knockout</p>
+  <header>
+    <div class="header-content">
+      <img src="logo_efootball_30th.png" alt="eFootball Logo" class="logo-kiri" />
+      <div class="text tengah">
+        <h1>eFootball Tournament 2025</h1>
+        <p class="sub">12 Tim | 15 – 21 Agustus | Format Grup & Knockout</p>
+      </div>
+      <img src="pngegg.png" alt="Player Image" class="header-img" />
     </div>
-    <img src="pngegg.png" alt="Player Image" class="header-img" />
+  </header>
+
+  <nav>
+    <button class="tab-btn active" data-tab="jadwal">Jadwal</button>
+    <button class="tab-btn" data-tab="klasemen">Klasemen</button>
+  </nav>
+
+  <div id="jadwal" class="tab active">
+    <div id="jadwal-content"></div>
   </div>
-</header>
-<nav>
-  <button class="tab-btn active" data-tab="jadwal">Jadwal</button>
-  <button class="tab-btn" data-tab="klasemen">Klasemen</button>
-</nav>
 
-<div id="jadwal" class="tab active">
-  <div id="jadwal-content"></div>
-</div>
+  <div id="klasemen" class="tab">
+    <div id="klasemen-A"></div>
+    <div id="klasemen-B"></div>
+  </div>
 
-<div id="klasemen" class="tab">
-  <div id="klasemen-A"></div>
-  <div id="klasemen-B"></div>
-</div>
-
-<script>
+  <script>
 const teams = {
   A: ['Farhan', 'Mugi', 'Amin', 'Dimas', 'Afif', 'Debi'],
   B: ['Riski', 'Fauzan', 'Fajri', 'Alwi', 'Hermansyah', 'Noval']
@@ -520,11 +486,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-
 </html>
-
-
-
-
-
-
