@@ -117,17 +117,70 @@
     display: none;
   }
 
-  @media (max-width: 600px) {
-    .match-row {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .match-row span {
-      width: 100%;
-      margin-bottom: 6px;
-    }
+@media (max-width: 600px) {
+  header {
+    padding: 20px 10px;
   }
+
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-kiri,
+  .header-img {
+    height: 100px;
+    margin: 0 0 10px;
+  }
+
+  .header-content .text.tengah {
+    transform: translateY(0);
+  }
+
+  header h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  header .sub {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  nav button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .match-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .match-row span {
+    width: 100%;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .input-score {
+    width: 36px;
+    padding: 3px;
+    font-size: 14px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    font-size: 13px;
+  }
+
+  th, td {
+    white-space: nowrap;
+    padding: 6px;
+  }
+}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 header {
@@ -469,6 +522,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
 
 
 
